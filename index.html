@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  
+  <div id="app">
+    <app-nav></app-nav>
+    <app-view>
+      <app-sidebar></app-sidebar>
+      <app-content>
+        <app-container>
+          <app-container-header>
+            <h1>Inventories</h1>
+            <p>Build charts and lists to keep all of your data in one convenient place</p>
+          </app-container-header>
+          <button>Click to create new inventory list</button>
+          <h3>Current inventories list</h3>
+          <button>Delete all items</button>
+          <ul>
+              <inventory-item
+                v-for="item in inventoryList"
+                v-bind:item="item"
+                v-bind:key="item.id"
+              ></inventory-item>
+            </ul>
+        </app-container>    
+      </app-content>
+    </app-view>
+  </div>
+
+    <script>
+      Vue.component('inventory-item', {
+        props: ['item'],
+        template: '<li><h3>{{ item.title }}</h3></br> <p>{{item.category}}}</p><p>{{item.desc}}</p><p>{{item.date}}</p></li>'
+      })
+
+      var app = new Vue({
+        el: '#app',
+        data: {
+          inventoryList: [
+            { id: 0, title: 'Example Inventory Title', desc: 'This is an example of...', category: 'SOC 2 Template', date: new Date().toLocaleDateString()},
+            { id: 1, title: 'Example Inventory Title', desc: 'This is an example of...', category: 'SOC 2 Template', date: new Date().toLocaleDateString()},
+            { id: 3, title: 'Example Inventory Title', desc: 'This is an example of...', category: 'SOC 2 Template', date: new Date().toLocaleDateString()},
+          ]
+        }
+      })
+      
+    </script>
+  </body>
+</html>
